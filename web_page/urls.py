@@ -9,7 +9,7 @@ urlpatterns = [
     path('noise_tracking/',views.noise_tracking,name='noise_tracking'),
     path('noise_plot/', views.noise_plot, name='noise_plot'),
     path('head_eye_tracking/',views.head_eye_tracking,name='head_eye_tracking'),
-    path('detect_windows/', views.detect_windows, name= 'detect_windows'),
+    # path('detect_windows/', views.detect_windows, name= 'detect_windows'),
 
    
 ]

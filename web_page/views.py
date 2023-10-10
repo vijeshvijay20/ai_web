@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import json
-from track_windows import track_window_changes
+# from track_windows import track_window_changes
 
 def index_view(request):
     # Your view logic here
@@ -48,7 +48,7 @@ def head_eye_tracking(request):
 
     # Pass the data to the template
     return render(request, 'web_page/head_eye_tracking.html', {'data': data})
-def detect_windows(request):
-    track_window_changes()
-    return render(request, 'web_page/window_trac.html')
+# def detect_windows(request):
+#     track_window_changes()
+#     return render(request, 'web_page/window_trac.html')
 
