@@ -46,4 +46,4 @@ def head_eye_tracking(request):
         data = json.load(json_file)
 
     # Pass the data to the template
-    return render(request, 'online_proctoring/head_eye_tracking.html', {'data': data})
+    return render(request, 'web_page/head_eye_tracking.html', {'data': data})
