@@ -102,24 +102,29 @@
 
             <!-- Right-side buttons -->
             <td>
-                <button class="button right">
-                    Show Objects Tracked
-                </button>
-                <button class="button right">
-                    Show Noise Classification
-                </button>
-                <button class="button right">
-                    Plot of last Noise classification                       
-                </button>
-                <button class="button right">Show Head and Eye Tracking</button>
-
-                <button class="button right">
-                    Show Windows Tracking                   
-                </button>
-                <button class="button right">
-                    >Show Yolov8 Tracking
-                </button>
                 
+                <button class="button left">
+                    <a href="{% url 'ai_proctoring' %}">Start AI Proctoring</a>
+                </button>
+                <button class="button left">
+                    <a href="{% url 'detect_object_y5' %}">Object Tracking</a>
+                </button>
+                <button class="button left"> 
+                    <a href="{% url 'detect_noise' %}">Noise Tracking</a>
+                </button>
+                <button class="button left">
+                    Head and Eye Tracking
+                <button class="button left">
+                </button>
+                    <a href="{% url 'head_and_eye' %}">Head and Eye Tracking
+                </button>
+                <button class="button left">
+                    <a href="{% url 'detect_windows' %}">Windows Switching Tracking</a>
+                </button>
+                <button class="button left">
+                    <a href="{% url 'yolov8_object_tracking' %}">Object Tracking Using YoloV8</a>
+                </button>
+\
             </td>
         </tr>
         <tr>

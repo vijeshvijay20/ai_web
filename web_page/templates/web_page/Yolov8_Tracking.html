@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YoloV8 Tracking</title>
+    <style>
+        /* Style for the image */
+        #logo {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Image at the top -->
+    <img id="logo" src="{% static 'expertz.png' %}" alt="Expertz Logo">
+    <!-- Rest of your template -->
+</body>
+
+<body>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Detections</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for timestamp, detections in data.items %}
+            <tr>
+                <td>{{ timestamp }}</td>
+                <td>{{ detections }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+</body>
+</html>
