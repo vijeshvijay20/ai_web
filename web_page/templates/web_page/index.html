@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Button Table Example</title>
+    <style>
+        /* Center align the content */
+        body {
+            text-align: center;
+        }
+
+        /* Style for the table */
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        /* Style for table cells */
+        td {
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Style for left buttons */
+        .button.left {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: rgb(120, 150, 200); /* Left button background color */
+            color: #FFFFFF; /* White font color */
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Style for right buttons */
+        .button.right {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: rgb(45, 149, 186); /* Right button background color */
+            color: #FFFFFF; /* White font color */
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Style for the "Stop Running Process" button */
+        .button.stop {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #DC3545; /* Red background color */
+            color: #FFFFFF; /* White font color */
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Style for the image */
+        #logo {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Image at the top -->
+    <img id="logo" src="static/expertz.png" alt="Expertz Logo">
+
+    <!-- Table for buttons -->
+    <table>
+        <tr>
+            <!-- Left-side buttons -->
+            <td>
+                <button class="button left">
+                    Start AI Proctoring
+                </button>
+                <button class="button left">
+                    Object Tracking
+                </button>
+                <button class="button left"> 
+                    Noise Tracking
+                </button>
+                <button class="button left">
+                    Head and Eye Tracking
+                </button>
+                <button class="button left">
+                    Head and Eye Tracking
+                </button>
+                <button class="button left">
+                    Windows Switching Tracking
+                </button>
+                <button class="button left">
+                Object Tracking Using YoloV8
+                </button>
+\
+                
+            </td>
+
+            <!-- Right-side buttons -->
+            <td>
+                <button class="button right">
+                    Show Objects Tracked
+                </button>
+                <button class="button right">
+                    Show Noise Classification
+                </button>
+                <button class="button right">
+                    Plot of last Noise classification                       
+                </button>
+                <button class="button right">Show Head and Eye Tracking</button>
+
+                <button class="button right">
+                    Show Windows Tracking                   
+                </button>
+                <button class="button right">
+                    >Show Yolov8 Tracking
+                </button>
+                
+            </td>
+        </tr>
+        <tr>
+            <!-- Centered "Stop Running Process" button -->
+            <td colspan="2">
+                <button class="button stop">
+                    Stop Running Process
+                </button> 
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
