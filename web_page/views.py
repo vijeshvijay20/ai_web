@@ -40,3 +40,10 @@ def noise_plot(request):
     # You don't need to pass any data to this view.
     return render(request, 'web_page/noise_plot.html')
 
+def head_eye_tracking(request):
+    # Read JSON data from the file
+    with open('head_pose_data.json', 'r') as json_file:
+        data = json.load(json_file)
+
+    # Pass the data to the template
+    return render(request, 'online_proctoring/head_eye_tracking.html', {'data': data})
