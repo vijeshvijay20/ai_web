@@ -1,35 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Webcam to OpenCV</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Webcam Capture</title>
 </head>
 <body>
-    <video id="webcam" autoplay width="640" height="480"></video>
-    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+    <h1>WebRTC Webcam Capture</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="startButton">Start Capture</button>
+    <button id="stopButton">Stop Capture</button>
 
     <script>
-        const videoElement = document.getElementById('webcam');
-        const canvasElement = document.getElementById('canvas');
-        const canvasContext = canvasElement.getContext('2d');
+        const video = document.getElementById('video');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
 
-        // Get user media (access webcam)
-        async function initUserMedia() {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            videoElement.srcObject = stream;
+        // Check if the browser supports WebRTC
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            startButton.addEventListener('click', startCapture);
+            stopButton.addEventListener('click', stopCapture);
+        } else {
+            alert('WebRTC is not supported in your browser');
         }
 
-        initUserMedia();
+        let stream;
 
-        // Send the captured frame to the server
-        const socket = new WebSocket('ws://3.109.64.43:8000'); 
+        function startCapture() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (mediaStream) {
+                    stream = mediaStream;
+                    video.srcObject = mediaStream;
+                })
+                .catch(function (error) {
+                    console.error('Error accessing the webcam:', error);
+                });
+        }
 
-        videoElement.addEventListener('play', function() {
-            const canvasInterval = setInterval(function() {
-                canvasContext.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
-                const frameData = canvasElement.toDataURL('image/jpeg');
-                socket.send(frameData);
-            }, 100); // Adjust the interval as needed
-        });
+        function stopCapture() {
+            if (stream) {
+                const tracks = stream.getTracks();
+                tracks.forEach(function (track) {
+                    track.stop();
+                });
+                video.srcObject = null;
+            }
+        }
     </script>
 </body>
 </html>
