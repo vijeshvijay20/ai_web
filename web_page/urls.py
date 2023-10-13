@@ -10,6 +10,8 @@ urlpatterns = [
     path('noise_plot/', views.noise_plot, name='noise_plot'),
     path('head_eye_tracking/',views.head_eye_tracking,name='head_eye_tracking'),
     # path('detect_windows/', views.detect_windows, name= 'detect_windows'),
+     path('frame_processing/', views.FrameProcessingView.as_view(), name='frame_processing'),
+     path('web_cam', views.IndexView.as_view(), name='web_cam'),
 
    
 ]

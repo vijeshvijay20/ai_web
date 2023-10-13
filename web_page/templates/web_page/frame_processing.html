@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frame Processing</title>
+</head>
+<body>
+    <h1>Frame Processing</h1>
+    
+    <!-- Display the processed frame here -->
+    <img id="processed-frame" src="" alt="Processed Frame">
+
+    <script>
+        // JavaScript code to update the processed frame
+        var socket = new WebSocket("ws://" + window.location.host + "/ws/some_path/");
+
+        socket.onmessage = function(event) {
+            var processedFrameData = JSON.parse(event.data);
+            var processedFrame = new Uint8Array(processedFrameData.frame_data);
+            var blob = new Blob([processedFrame], { type: 'image/jpeg' });
+            var url = URL.createObjectURL(blob);
+
+            // Update the image source to display the processed frame
+            document.getElementById("processed-frame").src = url;
+        };
+    </script>
+</body>
+</html>
