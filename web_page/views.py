@@ -66,7 +66,7 @@ def head_eye_tracking(request):
 
 class IndexView(View):
     def get(self, request):
-        return render(request, 'web_cam.html')
+        return render(request, 'web_page/web_cam.html')
 
 class FrameConsumer(AsyncWebsocketConsumer):
     async def connect(self):
