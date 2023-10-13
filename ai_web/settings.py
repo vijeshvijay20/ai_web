@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'tinymce',
     'crispy_bootstrap5',
+    "channels",
 
 ]
 
@@ -133,3 +134,12 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('3.109.64.43', 6379)],  # Use the correct IP address of your Redis server
+        },
+    },
+}

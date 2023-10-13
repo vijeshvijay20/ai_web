@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webcam to OpenCV</title>
+</head>
+<body>
+    <video id="webcam" autoplay width="640" height="480"></video>
+    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+
+    <script>
+        const videoElement = document.getElementById('webcam');
+        const canvasElement = document.getElementById('canvas');
+        const canvasContext = canvasElement.getContext('2d');
+
+        // Get user media (access webcam)
+        async function initUserMedia() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            videoElement.srcObject = stream;
+        }
+
+        initUserMedia();
+
+        // Send the captured frame to the server
+        const socket = new WebSocket('ws://3.109.64.43:8000'); 
+
+        videoElement.addEventListener('play', function() {
+            const canvasInterval = setInterval(function() {
+                canvasContext.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+                const frameData = canvasElement.toDataURL('image/jpeg');
+                socket.send(frameData);
+            }, 100); // Adjust the interval as needed
+        });
+    </script>
+</body>
+</html>
