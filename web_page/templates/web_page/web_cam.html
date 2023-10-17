@@ -1,51 +1,19 @@
+<!-- video_processing/templates/video_processing/capture.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebRTC Webcam Capture</title>
+    <title>Capture Video</title>
 </head>
 <body>
-    <h1>WebRTC Webcam Capture</h1>
+    <h1>Capture Video from Webcam</h1>
     <video id="video" width="640" height="480" autoplay></video>
-    <button id="startButton">Start Capture</button>
-    <button id="stopButton">Stop Capture</button>
-
-    <script>
-        const video = document.getElementById('video');
-        const startButton = document.getElementById('startButton');
-        const stopButton = document.getElementById('stopButton');
-
-        // Check if the browser supports WebRTC
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            startButton.addEventListener('click', startCapture);
-            stopButton.addEventListener('click', stopCapture);
-        } else {
-            alert('WebRTC is not supported in your browser');
-        }
-
-        let stream;
-
-        function startCapture() {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function (mediaStream) {
-                    stream = mediaStream;
-                    video.srcObject = mediaStream;
-                })
-                .catch(function (error) {
-                    console.error('Error accessing the webcam:', error);
-                });
-        }
-
-        function stopCapture() {
-            if (stream) {
-                const tracks = stream.getTracks();
-                tracks.forEach(function (track) {
-                    track.stop();
-                });
-                video.srcObject = null;
-            }
-        }
-    </script>
+    <button id="startButton">Start Recording</button>
+    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+    <br>
+    <button id="stopButton" style="display: none;">Stop Recording</button>
+    <button id="processButton" style="display: none;">Process Video</button>
+    <br>
+    <video id="recorded" controls style="display: none;"></video>
 </body>
+<script src="{% static 'video_processing/capture.js' %}"></script>
 </html>
