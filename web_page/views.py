@@ -8,6 +8,12 @@ import cv2
 import websockets
 from channels.generic.websocket import AsyncWebsocketConsumer
 
+from django.http import JsonResponse
+import numpy as np
+import os
+import time
+
+
 
 
 # from track_windows import track_window_changes
@@ -65,3 +71,28 @@ def head_eye_tracking(request):
 
 def capture_video(request):
     return render(request, 'web_page/web_cam.html')
+
+
+
+def process_video(request):
+    if request.method == 'POST':
+        # Access the video frames sent from the user
+        frames = request.POST.getlist('frames[]')
+
+        # Create a unique directory to save the frames
+        timestamp = int(time.time())
+        frame_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), str(timestamp))
+        os.makedirs(frame_dir, exist_ok=True)
+
+        # Process and save each frame as a PNG image
+        for idx, frame_data in enumerate(frames):
+            frame = np.fromstring(frame_data, dtype=np.uint8, sep=' ')
+            frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
+
+            # Save the frame as a PNG image with a unique filename
+            frame_filename = os.path.join(frame_dir, f'frame_{idx}.png')
+            cv2.imwrite(frame_filename, frame)
+
+        return JsonResponse({'status': 'Video frames saved as PNG images.'})
+
+    return JsonResponse({'status': 'Video processing completed.'})
