@@ -63,33 +63,5 @@ def head_eye_tracking(request):
 #     return render(request, 'web_page/window_trac.html')
 
 
-
-class IndexView(View):
-    def get(self, request):
-        return render(request, 'web_page/web_cam.html')
-
-class FrameConsumer(AsyncWebsocketConsumer):
-    async def connect(self):
-        await self.accept()
-
-    async def disconnect(self, close_code):
-        pass
-
-    async def receive(self, text_data):
-        # Send received data to the WebSocket server
-        async with websockets.connect('ws://0.0.0.0:9000/') as websocket:
-            await websocket.send(text_data)
-            frame_data = await websocket.recv()
-
-            # Process the frame using OpenCV
-            frame = cv2.imdecode(bytearray.fromhex(frame_data.split(',')[-1]), cv2.IMREAD_COLOR)
-            gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-            # Send the processed frame back to the client
-            await self.send({
-                'type': 'frame.processed',
-                'frame_data': gray_frame.tolist(),
-            })
-
-class FrameProcessingView(TemplateView):
-    template_name = 'web_page/frame_processing.html'
+def capture_video(request):
+    return render(request, 'web_page/web_cam.html')
